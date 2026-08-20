@@ -19,7 +19,6 @@ Frequentadores de cinema que buscam agilidade e praticidade.
 - **Autenticação:** JWT
 
 ## Funcionalidades implementadas
-(Atualizar conforme evolução das etapas)
 
 ## Telas previstas
 - Home com filmes em cartaz
