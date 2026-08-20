@@ -1,0 +1,29 @@
+# Node.js
+node_modules/
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+build/
+
+# Flutter
+*.lock
+*.iml
+*.class
+*.log
+.pub-cache/
+.pub/
+build/
+*.apk
+*.aab
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
