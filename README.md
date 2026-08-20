@@ -54,4 +54,4 @@ CineFacil/
 Em desenvolvimento - Etapa 01 concluída
 
 ## Disciplina
-Projeto da disciplina [Nome da Disciplina] - [Instituição]
+Projeto da disciplina Tecnologia de contrução de software 2 - PUC GO
