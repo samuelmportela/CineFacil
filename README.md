@@ -13,12 +13,16 @@ Frequentadores de cinema que buscam agilidade e praticidade.
 
 ## Tecnologias utilizadas
 - **Mobile:** Flutter
-- **Backend:** Node.js + Express
+- **Backend:** Node.js + Express (em desenvolvimento nas próximas etapas)
 - **Banco de dados:** PostgreSQL / MongoDB (em definição)
 - **API externa:** The Movie Database (TMDB)
 - **Autenticação:** JWT
 
-## Funcionalidades implementadas
+## Funcionalidades implementadas (Etapa 2)
+- **Tela Inicial (Home):** Listagem de filmes em cartaz com dados dinâmicos simulados (*mocks*).
+- **Tela de Detalhes:** Exibição de sinopse, gênero, duração e classificação do filme selecionado.
+- **Seleção de Assentos:** Mapa interativo em grade (GridView) permitindo a escolha manual da poltrona.
+- **Checkout e Confirmação:** Resumo detalhado da compra e diálogo modal de conclusão de pedido com geração de ingresso digital.
 
 ## Telas previstas
 - Home com filmes em cartaz
@@ -40,18 +44,19 @@ cd src/backend
 npm install
 npm run dev
 
-## Estrutura do projeto
+### Estrutura do projeto
 CineFacil/
 ├── README.md
 ├── docs/
-│   └── proposta.md
+│   ├── proposta.md
+│   └── etapa-02.md
 ├── src/
 │   ├── mobile/
 │   └── backend/
 └── tests/
 
 ## Status do projeto
-Em desenvolvimento - Etapa 01 concluída
+Em desenvolvimento - Etapa 02 (Protótipo de Interface) concluída
 
 ## Disciplina
-Projeto da disciplina Tecnologia de contrução de software 2 - PUC GO
+Projeto da disciplina Tecnologia de construção de software 2 - PUC GO
