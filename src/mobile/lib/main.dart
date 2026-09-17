@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/main_screen.dart';
 
 void main() {
   runApp(const CineFacilApp());
@@ -17,7 +17,7 @@ class CineFacilApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.grey[100],
       ),
-      home: const HomeScreen(),
+      home: const MainScreen(),
     );
   }
 }

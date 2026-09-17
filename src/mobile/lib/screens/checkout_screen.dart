@@ -19,21 +19,26 @@ class CheckoutScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Confirme os dados da sua compra:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Semantics(
+              header: true,
+              child: const Text('Confirme os dados da sua compra:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ),
             const SizedBox(height: 20),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Filme: $movieTitle', style: const TextStyle(fontSize: 16)),
-                    const SizedBox(height: 8),
-                    Text('Assento: $seat', style: const TextStyle(fontSize: 16)),
-                    const SizedBox(height: 8),
-                    // Usando barra invertida para escapar o cifrão
-                    const Text('Valor Total: R\$ 30,00', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  ],
+            MergeSemantics(
+              child: Card(
+                elevation: 4,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Filme: $movieTitle', style: const TextStyle(fontSize: 16)),
+                      const SizedBox(height: 8),
+                      Text('Assento: $seat', style: const TextStyle(fontSize: 16)),
+                      const SizedBox(height: 8),
+                      const Text('Valor Total: R\$ 30,00', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -44,9 +49,21 @@ class CheckoutScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green[700],
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  minimumSize: const Size(double.infinity, 54),
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Processando sua compra...'),
+                      duration: Duration(seconds: 1),
+                      backgroundColor: Colors.black87,
+                    ),
+                  );
+
+                  await Future.delayed(const Duration(seconds: 1));
+
+                  if (!context.mounted) return;
+
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -65,7 +82,7 @@ class CheckoutScreen extends StatelessWidget {
                     },
                   );
                 },
-                child: const Text('Confirmar Compra', style: TextStyle(fontSize: 16)),
+                child: const Text('Confirmar Compra', style: TextStyle(fontSize: 18)),
               ),
             ),
           ],

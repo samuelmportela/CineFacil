@@ -12,7 +12,6 @@ class SeatSelectionScreen extends StatefulWidget {
 
 class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
   String? selectedSeat;
-
   final List<String> seats = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
 
   @override
@@ -27,11 +26,14 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              width: double.infinity,
-              color: Colors.grey[300],
-              child: const Text('TELA DO CINEMA', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)),
+            Semantics(
+              label: 'Ilustração da tela do cinema',
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                width: double.infinity,
+                color: Colors.grey[300],
+                child: const Text('TELA DO CINEMA', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
             ),
             const SizedBox(height: 30),
             Expanded(
@@ -40,29 +42,36 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                   crossAxisCount: 3,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
+                  childAspectRatio: 1.2,
                 ),
                 itemCount: seats.length,
                 itemBuilder: (context, index) {
                   final seat = seats[index];
                   final isSelected = selectedSeat == seat;
 
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedSeat = seat;
-                      });
-                    },
-                    child: Container(
-                      alignment: Alignment.center, // Correção do alinhamento
-                      decoration: BoxDecoration(
-                        color: isSelected ? Colors.green : Colors.blue[200],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        seat,
-                        style: TextStyle(
-                          color: isSelected ? Colors.white : Colors.black,
-                          fontWeight: FontWeight.bold,
+                  return Semantics(
+                    button: true,
+                    label: 'Assento $seat',
+                    hint: isSelected ? 'Selecionado' : 'Disponível para seleção',
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedSeat = seat;
+                        });
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: isSelected ? Colors.green : Colors.blue[200],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          seat,
+                          style: TextStyle(
+                            color: isSelected ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ),
@@ -71,7 +80,10 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
               ),
             ),
             if (selectedSeat != null)
-              Text('Assento selecionado: $selectedSeat', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green)),
+              Semantics(
+                liveRegion: true,
+                child: Text('Assento selecionado: $selectedSeat', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green)),
+              ),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
@@ -79,7 +91,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue[900],
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  minimumSize: const Size(double.infinity, 54),
                 ),
                 onPressed: selectedSeat == null ? null : () {
                   Navigator.push(
