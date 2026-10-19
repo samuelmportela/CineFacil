@@ -56,7 +56,7 @@ CineFacil/
 └── tests/
 
 ## Status do projeto
-Em desenvolvimento - Etapa 02 (Protótipo de Interface) concluída
+ETAPA 4 — PERSISTÊNCIA LOCAL DE DADOS
 
 ## Disciplina
 Projeto da disciplina Tecnologia de construção de software 2 - PUC GO

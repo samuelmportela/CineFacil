@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
+import 'tickets_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -13,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const Center(child: Text('Tela de Perfil e Histórico (Em breve)', style: TextStyle(fontSize: 18))),
+    const TicketsScreen(), 
   ];
 
   void _onItemTapped(int index) {
@@ -37,10 +38,11 @@ class _MainScreenState extends State<MainScreen> {
             tooltip: 'Aba Em Cartaz', // Acessibilidade
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-            tooltip: 'Aba Perfil do Usuário', // Acessibilidade
-          ),
+          icon: Icon(Icons.qr_code_scanner),
+          label: 'Ingressos',
+          tooltip: 'Aba Meus Ingressos', // Acessibilidade
+        ),
+
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue[900],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/ticket_service.dart';
 
 class CheckoutScreen extends StatelessWidget {
   final String movieTitle;
@@ -63,6 +64,19 @@ class CheckoutScreen extends StatelessWidget {
                   await Future.delayed(const Duration(seconds: 1));
 
                   if (!context.mounted) return;
+
+                  // 1. Gera um ID único baseado na hora atual
+                  String idUnico = DateTime.now().millisecondsSinceEpoch.toString();
+      
+                  // 2. Monta os dados do ingresso
+                  Map<String, dynamic> novoIngresso = {
+                   'id': idUnico,
+                   'movieTitle': movieTitle, // Puxa o nome do filme recebido na tela
+                   'seat': seat,             // Puxa a poltrona recebida na tela
+                   'date': DateTime.now().toIso8601String(),
+                  };
+
+                  await TicketService.salvarIngresso(novoIngresso);
 
                   showDialog(
                     context: context,
