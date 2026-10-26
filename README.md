@@ -56,7 +56,7 @@ CineFacil/
 └── tests/
 
 ## Status do projeto
-ETAPA 4 — PERSISTÊNCIA LOCAL DE DADOS
+[Ver documentação da Etapa 5](docs/etapa-05.md)
 
 ## Disciplina
 Projeto da disciplina Tecnologia de construção de software 2 - PUC GO
