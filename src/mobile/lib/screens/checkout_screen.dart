@@ -53,6 +53,16 @@ class CheckoutScreen extends StatelessWidget {
                   minimumSize: const Size(double.infinity, 54),
                 ),
                 onPressed: () async {
+                  // TRATAMENTO DE ENTRADA INVÁLIDA (ETAPA 5)
+                  if (seat.isEmpty || seat == 'Nenhum assento selecionado') {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Erro: Selecione uma poltrona antes de comprar.'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                    return; // Aborta a compra imediatamente e não executa o código abaixo
+                  }
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Processando sua compra...'),

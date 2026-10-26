@@ -38,11 +38,11 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen> {
             const SizedBox(height: 30),
             Expanded(
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 60, // A poltrona terá no máximo 60 pixels de largura
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 1.2,
+                  childAspectRatio: 1.0, // Mantém os botões quadrados
                 ),
                 itemCount: seats.length,
                 itemBuilder: (context, index) {
