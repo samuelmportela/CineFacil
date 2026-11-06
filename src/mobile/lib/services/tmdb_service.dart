@@ -1,24 +1,53 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 class TmdbService {
-  // Chave pública de teste (pode usar esta para a avaliação)
-  static const String _apiKey = '9a72df9433df71658cd96a6039ea30e7';
-  static const String _baseUrl = 'https://api.themoviedb.org/3';
+  static const String _apiKey = '9a72df9433df71658cd96a6039ea30e7'; 
+  
+  // Configuração global da instância do Dio (Aula 16)
+  static final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: 'https://api.themoviedb.org/3',
+      connectTimeout: const Duration(seconds: 10), // Timeout nativo do Dio
+      receiveTimeout: const Duration(seconds: 10),
+      headers: {
+        'Accept': 'application/json',
+      },
+    ),
+  )..interceptors.addAll([
+      // 1. A mágica do Interceptor: Injeta a API Key em TODAS as rotas automaticamente
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          options.queryParameters['api_key'] = _apiKey;
+          options.queryParameters['language'] = 'pt-BR';
+          return handler.next(options); // Continua a viagem da requisição
+        },
+      ),
+      // 2. Interceptor de Log: Imprime no terminal o tráfego da rede para o professor ver
+      LogInterceptor(
+        requestHeader: false,
+        responseBody: false, 
+        request: true,
+      ),
+    ]);
 
+  // Operação de consulta de dados (GET)
   static Future<List<dynamic>> obterFilmesEmCartaz() async {
-    final url = Uri.parse('$_baseUrl/movie/now_playing?api_key=$_apiKey&language=pt-BR&page=1');
-    
     try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        return data['results']; // Retorna a lista real de filmes
-      } else {
-        throw Exception('Falha ao carregar filmes do servidor.');
-      }
+      // Como o Interceptor já coloca a API Key, o código da requisição fica super limpo!
+      final response = await _dio.get(
+        '/movie/now_playing',
+        queryParameters: {'page': 1},
+      );
+      
+      // Dio parseia JSON automaticamente
+      return response.data['results'];
+      
+    } on DioException catch (e) {
+      // Captura erros automáticos de status 4xx e 5xx da Aula 15
+      print('Erro HTTP Status: ${e.response?.statusCode}');
+      throw Exception('Falha ao carregar filmes do servidor.');
     } catch (e) {
-      return []; // Retorna lista vazia em caso de falha de rede
+      throw Exception('Erro de conexão ou timeout.');
     }
   }
 }
