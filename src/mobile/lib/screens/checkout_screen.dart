@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/ticket_service.dart';
+import 'package:provider/provider.dart';
+import '../providers/ticket_provider.dart';
 
 class CheckoutScreen extends StatelessWidget {
   final String movieTitle;
@@ -86,7 +88,7 @@ class CheckoutScreen extends StatelessWidget {
                    'date': DateTime.now().toIso8601String(),
                   };
 
-                  await TicketService.salvarIngresso(novoIngresso);
+                  await context.read<TicketProvider>().adicionarIngresso(novoIngresso);
 
                   showDialog(
                     context: context,

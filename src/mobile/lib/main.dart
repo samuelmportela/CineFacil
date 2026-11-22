@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'screens/main_screen.dart';
+import 'package:provider/provider.dart';
+import 'providers/ticket_provider.dart';
 
 void main() {
-  runApp(const CineFacilApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => TicketProvider(),
+      child: const CineFacilApp(),
+    ),
+  );
 }
 
 class CineFacilApp extends StatelessWidget {
